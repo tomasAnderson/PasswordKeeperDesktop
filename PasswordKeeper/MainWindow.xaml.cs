@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PasswordKeeper.ViewModel;
 
 namespace PasswordKeeper
 {
@@ -23,6 +24,7 @@ namespace PasswordKeeper
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new ItemViewModel();
         }
     }
 }

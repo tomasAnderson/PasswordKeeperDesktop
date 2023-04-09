@@ -4,9 +4,29 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordKeeper"
+        xmlns:vm="clr-namespace:PasswordKeeper.ViewModel"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.DataContext>
+        <vm:ItemViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate x:Key="CollectionView">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Id}"/>
+                <TextBlock Grid.Column="1" Text="{Binding ServiceName}"/>
+                <TextBlock Grid.Column="2" Text="{Binding Login}"/>
+                <TextBlock Grid.Column="3" Text="{Binding Password}"/>
+            </Grid>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
-
+        <ItemsControl ItemsSource="{Binding ItemModels}" ItemTemplate="{StaticResource CollectionView}"/>
     </Grid>
 </Window>
