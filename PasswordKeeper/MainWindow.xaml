@@ -5,28 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PasswordKeeper"
         xmlns:vm="clr-namespace:PasswordKeeper.ViewModel"
+        xmlns:view="clr-namespace:PasswordKeeper.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="900">
     <Window.DataContext>
         <vm:ItemViewModel/>
     </Window.DataContext>
     <Window.Resources>
         <DataTemplate x:Key="CollectionView">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Text="{Binding Id}"/>
-                <TextBlock Grid.Column="1" Text="{Binding ServiceName}"/>
-                <TextBlock Grid.Column="2" Text="{Binding Login}"/>
-                <TextBlock Grid.Column="3" Text="{Binding Password}"/>
-            </Grid>
+            <Border Margin="10, 0, 10, 10"
+                    Background="#ededed"
+                    CornerRadius="8">
+                <Border.Effect>
+                    <DropShadowEffect Color="Gray" Opacity="0.5"/>
+                </Border.Effect>
+                <view:ItemOfCollection/>
+            </Border>
         </DataTemplate>
+        <Style x:Key="RoundCornerButtonStyle" TargetType="Button">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Border Margin="10, 0, 10, 10"
+                                Background="#ededed"
+                                CornerRadius="8">
+                            <Border.Effect>
+                                <DropShadowEffect Color="Gray" Opacity="0.5"/>
+                            </Border.Effect>
+                            <view:ItemOfCollection/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Window.Resources>
-    <Grid>
-        <ItemsControl ItemsSource="{Binding ItemModels}" ItemTemplate="{StaticResource CollectionView}"/>
+    <Grid Background="#D9D9D9">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.2*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Margin="10,30,10,30" Content="Search"></Button>
+            <Button Grid.Column="1" Margin="10,30,10,30" Style="{StaticResource RoundCornerButtonStyle}" Background="Red" Content="Add"></Button>
+        </Grid>
+        <ItemsControl Grid.Row="1" ItemsSource="{Binding ItemModels}" ItemTemplate="{StaticResource CollectionView}"/>
     </Grid>
 </Window>
